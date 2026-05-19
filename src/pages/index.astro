@@ -1,0 +1,337 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AgentCard from '../components/AgentCard.astro';
+import LogEntry from '../components/LogEntry.astro';
+import { agents } from '../data/agents';
+import { logs } from '../data/logs';
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">CLAUDE CODE 実装伴走ポートフォリオ</span>
+      <h1 class="hero-title">
+        中小企業の業務を、<br />
+        <span class="hero-accent">AIエージェントのチーム</span>で支える。
+      </h1>
+      <p class="hero-lead">
+        Claude Code を導入したいが内製リソースが足りない経営者・管理職へ。
+        専門分野を持つAIエージェントが、それぞれの立場から実装を伴走します。
+      </p>
+      <div class="hero-cta-row">
+        <a href="#team" class="btn-primary">エージェントを見る</a>
+        <a href="#contact" class="btn-ghost">無料で相談する <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" class="team">
+    <div class="section-inner">
+      <header class="section-head">
+        <span class="section-eyebrow">AI AGENT TEAM</span>
+        <h2 class="section-title">専門分野を持つエージェントたち</h2>
+        <p class="section-lead">
+          経営者の「困った」を、それぞれの立場から解決する稼働中のチームです。
+        </p>
+      </header>
+      <div class="agent-grid">
+        {agents.map((agent) => <AgentCard agent={agent} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="log" class="log-section">
+    <div class="section-inner">
+      <header class="section-head">
+        <span class="section-eyebrow">LEARNING IN PUBLIC</span>
+        <h2 class="section-title">実装ログ</h2>
+        <p class="section-lead">
+          日々のつまづきと、その対処から得た学び。完成品ではなく過程を残します。
+        </p>
+      </header>
+      <div class="log-grid">
+        {logs.map((log) => <LogEntry log={log} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="section-inner about-inner">
+      <header class="section-head">
+        <span class="section-eyebrow">ABOUT</span>
+        <h2 class="section-title">さかちゃん</h2>
+        <p class="section-lead">
+          Claude Code を中心とした AI 実装で、中小企業の業務を伴走するフリーランス。
+          X（<a class="inline-link" href="https://x.com/sakachan_ai" target="_blank" rel="noopener noreferrer">@sakachan_ai</a>）で
+          日々の実装過程を公開しています。
+        </p>
+      </header>
+      <div class="about-grid">
+        <div class="about-block">
+          <h3 class="about-h3">できること</h3>
+          <ul class="about-list">
+            <li>Claude Code を活用した AI エージェント設計・実装（秘書／コンテンツ／デザイン等）</li>
+            <li>小規模チーム向けの業務自動化（メール対応・SNS運用・スケジュール調整）</li>
+            <li>Python / TypeScript / Astro / GAS / Vercel を組み合わせた軽量実装</li>
+            <li>Learning in public での実装プロセス公開（Xと本サイトの実装ログ）</li>
+          </ul>
+        </div>
+        <div class="about-block">
+          <h3 class="about-h3">スタンス</h3>
+          <ul class="about-list">
+            <li>完成品の納品より、業務に馴染ませながら育てる伴走を重視</li>
+            <li>セキュリティ・著作権・アクセシビリティ（WCAG AA）は妥協しない</li>
+            <li>検証・失敗・改善の過程を隠さず公開する</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="section-inner">
+      <header class="section-head">
+        <span class="section-eyebrow">CONTACT</span>
+        <h2 class="section-title">相談する</h2>
+        <p class="section-lead">
+          Claude Code の導入、AI エージェントの実装伴走について、お気軽にどうぞ。
+          まずは無料の壁打ちから始めます。
+        </p>
+      </header>
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:my.biz.official.jp@gmail.com">
+          <span class="contact-eyebrow">EMAIL</span>
+          <h3 class="contact-h3">メールで相談する</h3>
+          <p class="contact-body">my.biz.official.jp@gmail.com</p>
+          <p class="contact-hint">案件・お見積もりはこちらから <span aria-hidden="true">→</span></p>
+        </a>
+        <a class="contact-card" href="https://x.com/sakachan_ai" target="_blank" rel="noopener noreferrer">
+          <span class="contact-eyebrow">X / DM</span>
+          <h3 class="contact-h3">X で DM する</h3>
+          <p class="contact-body">@sakachan_ai</p>
+          <p class="contact-hint">気軽な質問・雑談はこちらから <span aria-hidden="true">→</span></p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    background: linear-gradient(180deg, var(--color-aizumi) 0%, var(--color-aizumi-deep) 100%);
+    color: var(--color-kinari);
+    padding: var(--space-7) var(--space-3);
+  }
+  .hero-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .hero-eyebrow {
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    color: var(--color-kincha-light);
+    letter-spacing: 0.15em;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+  .hero-accent {
+    color: var(--color-kincha-light);
+  }
+  .hero-lead {
+    max-width: 640px;
+    color: rgba(246, 241, 231, 0.85);
+    font-size: var(--font-size-lg);
+  }
+  .hero-cta-row {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--color-kincha);
+    color: var(--color-aizumi-deep);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover {
+    background: var(--color-kincha-light);
+  }
+  .btn-ghost {
+    border: 1px solid rgba(246, 241, 231, 0.4);
+    color: var(--color-kinari);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-kincha-light);
+    color: var(--color-kincha-light);
+  }
+
+  .team,
+  .log-section,
+  .about,
+  .contact {
+    padding: var(--space-7) var(--space-3);
+  }
+  .team {
+    background: var(--color-kinari);
+  }
+  .log-section {
+    background: var(--color-kinari-deep);
+  }
+  .about {
+    background: var(--color-aizumi);
+    color: var(--color-kinari);
+  }
+  .contact {
+    background: var(--color-kinari);
+  }
+
+  .section-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-bottom: var(--space-5);
+  }
+  .section-eyebrow {
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    color: var(--color-kincha);
+    letter-spacing: 0.15em;
+  }
+  .about .section-eyebrow {
+    color: var(--color-kincha-light);
+  }
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+  }
+  .section-lead {
+    color: var(--color-usuzumi);
+    max-width: 640px;
+  }
+  .about .section-lead {
+    color: rgba(246, 241, 231, 0.85);
+  }
+
+  .agent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-3);
+  }
+  .log-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .about-inner {
+    color: var(--color-kinari);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-5);
+  }
+  .about-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .about-h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-kincha-light);
+  }
+  .about-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .about-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: rgba(246, 241, 231, 0.9);
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+  }
+  .about-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 8px;
+    height: 1px;
+    background: var(--color-kincha-light);
+  }
+  .inline-link {
+    color: var(--color-kincha-light);
+    border-bottom: 1px solid var(--color-kincha-light);
+    padding-bottom: 1px;
+    transition: opacity 0.15s ease;
+  }
+  .inline-link:hover {
+    opacity: 0.8;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+  }
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    background: var(--color-white);
+    border: 1px solid rgba(31, 42, 60, 0.08);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-aizumi);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .contact-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .contact-eyebrow {
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    color: var(--color-kincha);
+    letter-spacing: 0.12em;
+  }
+  .contact-h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+  }
+  .contact-body {
+    color: var(--color-usuzumi);
+    font-size: var(--font-size-sm);
+    word-break: break-all;
+  }
+  .contact-hint {
+    margin-top: var(--space-2);
+    color: var(--color-aizumi);
+    font-size: var(--font-size-sm);
+    border-top: 1px solid rgba(31, 42, 60, 0.08);
+    padding-top: var(--space-2);
+  }
+</style>

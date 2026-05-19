@@ -1,0 +1,111 @@
+---
+import type { LogEntry } from '../data/logs';
+interface Props {
+  log: LogEntry;
+}
+const { log } = Astro.props;
+---
+
+<article class="log">
+  <header class="log-head">
+    <time class="log-date">{log.date}</time>
+    <h3 class="log-title">{log.title}</h3>
+  </header>
+  <p class="log-summary">{log.summary}</p>
+  <div class="log-learnings-wrap">
+    <p class="log-label">学び</p>
+    <ul class="log-learnings">
+      {log.learnings.map((l) => <li>{l}</li>)}
+    </ul>
+  </div>
+  <ul class="log-tags">
+    {log.tags.map((t) => <li>{t}</li>)}
+  </ul>
+</article>
+
+<style>
+  .log {
+    padding: var(--space-4);
+    background: var(--color-white);
+    border: 1px solid rgba(31, 42, 60, 0.08);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .log:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .log-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .log-date {
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    color: var(--color-kincha);
+    letter-spacing: 0.1em;
+  }
+  .log-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    color: var(--color-aizumi);
+  }
+  .log-summary {
+    color: var(--color-usuzumi);
+    font-size: var(--font-size-sm);
+  }
+  .log-learnings-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .log-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-usuzumi-light);
+    letter-spacing: 0.05em;
+  }
+  .log-learnings {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-left: 0;
+  }
+  .log-learnings li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-aizumi);
+    line-height: 1.6;
+  }
+  .log-learnings li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 8px;
+    height: 1px;
+    background: var(--color-kincha);
+  }
+  .log-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    padding-left: 0;
+    margin-top: var(--space-1);
+  }
+  .log-tags li {
+    font-size: var(--font-size-xs);
+    color: var(--color-usuzumi-light);
+    background: var(--color-kinari);
+    padding: 2px var(--space-1);
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.05em;
+  }
+</style>

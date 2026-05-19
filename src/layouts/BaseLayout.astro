@@ -1,0 +1,134 @@
+---
+import '../styles/tokens.css';
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'さかちゃん｜Claude Code 実装伴走のポートフォリオ',
+  description = 'Claude Code を導入したいが内製リソースが足りない中小企業の経営者・管理職へ、AIエージェントの実装伴走を提供しています。',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="/" class="brand" aria-label="トップへ">
+          <span class="brand-mark" aria-hidden="true">さ</span>
+          <span class="brand-name">さかちゃん</span>
+        </a>
+        <nav class="site-nav" aria-label="メイン">
+          <a href="#team">エージェント</a>
+          <a href="#log">実装ログ</a>
+          <a href="#about">プロフィール</a>
+          <a href="#contact" class="nav-cta">相談する</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© 2026 さかちゃん / Learning in public</p>
+      </div>
+    </footer>
+
+    <style>
+      .site-header {
+        background: var(--color-aizumi);
+        color: var(--color-kinari);
+      }
+      .header-inner {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: var(--space-2) var(--space-3);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: var(--space-1);
+      }
+      .brand-mark {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-kincha);
+        color: var(--color-aizumi-deep);
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+      }
+      .brand-name {
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .site-nav {
+        display: flex;
+        gap: var(--space-3);
+        align-items: center;
+        font-size: var(--font-size-sm);
+      }
+      .site-nav a {
+        transition: color 0.15s ease;
+      }
+      .site-nav a:hover {
+        color: var(--color-kincha-light);
+      }
+      .nav-cta {
+        background: var(--color-kincha);
+        color: var(--color-aizumi-deep);
+        padding: var(--space-1) var(--space-2);
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+      }
+      .nav-cta:hover {
+        color: var(--color-aizumi-deep) !important;
+        background: var(--color-kincha-light);
+      }
+      .site-footer {
+        background: var(--color-aizumi-deep);
+        color: var(--color-usuzumi-light);
+      }
+      .footer-inner {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: var(--space-3);
+        font-size: var(--font-size-sm);
+      }
+      @media (max-width: 640px) {
+        .site-nav {
+          gap: var(--space-2);
+        }
+        .site-nav a:not(.nav-cta) {
+          display: none;
+        }
+      }
+    </style>
+  </body>
+</html>
