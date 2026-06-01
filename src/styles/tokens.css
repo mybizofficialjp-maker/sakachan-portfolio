@@ -5,6 +5,10 @@
   --color-kinari-deep: #ece5d2;
   --color-usuzumi: #4a4a4a;
   --color-usuzumi-light: #8a8a8a;
+  /* 明るい背景（白・生成り）上のミュートテキスト専用。AA確保のため #8a8a8a より濃い。
+     ※ --color-usuzumi-light は藍墨深背景のフッターで使われており（#8a8a8a で 4.76:1）、
+       そちらを濃くすると逆にコントラストが落ちるため、明背景用は別トークンに分離する。 */
+  --color-usuzumi-muted: #6e6e6e;
   --color-kincha: #b8862f;
   --color-kincha-light: #d6a345;
   --color-kincha-dark: #7d5a1c;

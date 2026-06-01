@@ -232,8 +232,13 @@ import { logs } from '../data/logs';
 
   .agent-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-3);
+  }
+  @media (max-width: 640px) {
+    .agent-grid {
+      grid-template-columns: 1fr;
+    }
   }
   .log-grid {
     display: grid;

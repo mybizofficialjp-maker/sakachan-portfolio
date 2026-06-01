@@ -8,6 +8,10 @@ const {
   title = 'さかちゃん｜Claude Code 実装伴走のポートフォリオ',
   description = 'Claude Code を導入したいが内製リソースが足りない中小企業の経営者・管理職へ、AIエージェントの実装伴走を提供しています。',
 } = Astro.props;
+
+const SITE_ORIGIN = 'https://sakachan-portfolio.vercel.app';
+const canonicalUrl = new URL(Astro.url.pathname, SITE_ORIGIN).href;
+const ogImageUrl = new URL('/ogp/ogp-cover.png', SITE_ORIGIN).href;
 ---
 
 <!doctype html>
@@ -17,10 +21,18 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="中小企業の業務を、AIエージェントのチームで支える。Claude Code 実装伴走ポートフォリオ" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@sakachan_ai" />
+    <meta name="twitter:image" content={ogImageUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
