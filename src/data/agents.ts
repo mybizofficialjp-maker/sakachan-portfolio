@@ -3,6 +3,7 @@ import secretaryImg from '../assets/agents/secretary.png';
 import contentStrategyImg from '../assets/agents/content-strategy.png';
 import designConsultantImg from '../assets/agents/design-consultant.png';
 import securityGuardImg from '../assets/agents/security-guard.png';
+import customerSupportImg from '../assets/agents/customer-support.png';
 
 export type Agent = {
   slug: string;
@@ -61,5 +62,17 @@ export const agents: Agent[] = [
       '新しいツール導入前の安全チェックと定期監視レポート',
     ],
     image: securityGuardImg,
+  },
+  {
+    slug: 'customer-support',
+    name: 'カスタマーサポートAI',
+    tag: 'カスタマーサポート',
+    pain: '問い合わせ対応に追われて本業が進まず、担当者ごとに対応品質がばらつく',
+    outcomes: [
+      'FAQ・問い合わせへの返信ドラフト作成',
+      '緊急度・感情・金額影響の3軸でエスカレーション判定',
+      '顧客の声（VOC）を集約して改善ポイントを抽出',
+    ],
+    image: customerSupportImg,
   },
 ];
