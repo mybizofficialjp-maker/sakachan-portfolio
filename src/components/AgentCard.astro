@@ -7,13 +7,15 @@ interface Props {
 const { agent } = Astro.props;
 ---
 
-<article class="card">
+<article class:list={['card', { 'card--feature': agent.feature }]}>
   <div class="card-image">
     <Image
       src={agent.image}
       alt=""
       widths={[400, 800]}
-      sizes="(min-width: 1120px) 360px, (min-width: 640px) 50vw, 100vw"
+      sizes={agent.feature
+        ? '(min-width: 1120px) 460px, (min-width: 640px) 45vw, 100vw'
+        : '(min-width: 1120px) 360px, (min-width: 640px) 50vw, 100vw'}
       formats={['webp']}
       quality={80}
       loading="lazy"
@@ -22,7 +24,9 @@ const { agent } = Astro.props;
   <div class="card-inner">
     <div class="card-head">
       <span class="card-tag">{agent.tag}</span>
-      <h3 class="card-title">{agent.name}</h3>
+      <h3 class="card-title">
+        <a class="card-title-link" href={`/agents/${agent.slug}`}>{agent.name}</a>
+      </h3>
     </div>
     <div class="card-body">
       <p class="card-label">こんなお困りごとを解決します</p>
@@ -32,14 +36,15 @@ const { agent } = Astro.props;
         {agent.outcomes.map((o) => <li>{o}</li>)}
       </ul>
     </div>
-    <a class="card-cta" href="#contact" aria-label={`${agent.name}について相談する`}>
-      このエージェントについて相談する <span aria-hidden="true">→</span>
+    <a class="card-cta" href={`/agents/${agent.slug}`} aria-label={`${agent.name}の詳細を見る`}>
+      詳しく見る <span aria-hidden="true">→</span>
     </a>
   </div>
 </article>
 
 <style>
   .card {
+    position: relative;
     display: flex;
     flex-direction: column;
     background: var(--color-white);
@@ -53,6 +58,44 @@ const { agent } = Astro.props;
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
   }
+
+  /* カード見出しのリンク。::after でカード全面を疑似クリック領域にする。
+     これで <a> をネストせずにカード全体を遷移対象にできる。 */
+  .card-title-link {
+    color: inherit;
+    transition: color 0.15s ease;
+  }
+  .card-title-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .card:hover .card-title-link {
+    color: var(--color-kincha-dark);
+  }
+
+  /* 横長フィーチャーカード：2カラムグリッドを横一杯にぶち抜き、
+     画像左・テキスト右の2分割にして「余白の谷」を埋める。
+     640px 以下では通常カードと同じ縦積みに戻す。 */
+  .card--feature {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 641px) {
+    .card--feature {
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .card--feature .card-image {
+      aspect-ratio: auto;
+      flex: 0 0 42%;
+      max-width: 42%;
+    }
+    .card--feature .card-inner {
+      justify-content: center;
+    }
+  }
+
   .card-image {
     aspect-ratio: 3 / 2;
     background: var(--color-kinari-deep);
@@ -127,6 +170,10 @@ const { agent } = Astro.props;
     background: var(--color-kincha);
   }
   .card-cta {
+    /* 見出しリンクの全面 ::after より前面に出して、
+       CTA 自体も独立したクリック対象として機能させる（遷移先は同じ詳細ページ）。 */
+    position: relative;
+    z-index: 2;
     margin-top: auto;
     font-size: var(--font-size-sm);
     color: var(--color-aizumi);

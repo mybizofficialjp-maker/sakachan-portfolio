@@ -99,12 +99,19 @@ import { logs } from '../data/logs';
         </p>
       </header>
       <div class="contact-grid">
-        <a class="contact-card" href="mailto:my.biz.official.jp@gmail.com">
+        <button
+          type="button"
+          class="contact-card"
+          data-mail-trigger
+          data-user="my.biz.official.jp"
+          data-domain="gmail.com"
+          aria-label="メールで相談する（メールソフトが開きます）"
+        >
           <span class="contact-eyebrow">EMAIL</span>
           <h3 class="contact-h3">メールで相談する</h3>
-          <p class="contact-body">my.biz.official.jp@gmail.com</p>
+          <p class="contact-body">ボタンを押すとメールソフトが開きます</p>
           <p class="contact-hint">案件・お見積もりはこちらから <span aria-hidden="true">→</span></p>
-        </a>
+        </button>
         <a class="contact-card" href="https://x.com/sakachan_ai" target="_blank" rel="noopener noreferrer">
           <span class="contact-eyebrow">X / DM</span>
           <h3 class="contact-h3">X で DM する</h3>
@@ -339,4 +346,26 @@ import { logs } from '../data/logs';
     border-top: 1px solid rgba(31, 42, 60, 0.08);
     padding-top: var(--space-2);
   }
+
+  /* メール相談ボタン：button 要素をカードと同じ見た目に整える */
+  button.contact-card {
+    appearance: none;
+    background: var(--color-white);
+    text-align: left;
+    width: 100%;
+    font: inherit;
+  }
 </style>
+
+<script>
+  // メールアドレスはHTMLソースに平文で置かず、ユーザー名とドメインを
+  // data-* に分けて持たせ、クリック時にJSで mailto を組み立てる。
+  // （スクレイピングによるアドレス収集対策。アクセシビリティは aria-label で担保）
+  const trigger = document.querySelector<HTMLButtonElement>('[data-mail-trigger]');
+  trigger?.addEventListener('click', () => {
+    const user = trigger.dataset.user ?? '';
+    const domain = trigger.dataset.domain ?? '';
+    if (!user || !domain) return;
+    window.location.href = 'mailto:' + user + '@' + domain;
+  });
+</script>

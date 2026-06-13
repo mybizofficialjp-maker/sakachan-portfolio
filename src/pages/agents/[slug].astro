@@ -1,0 +1,251 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { agents } from '../../data/agents';
+
+export function getStaticPaths() {
+  return agents.map((agent) => ({
+    params: { slug: agent.slug },
+    props: { agent },
+  }));
+}
+
+const { agent } = Astro.props;
+
+// BaseLayout に渡すと og:title / og:description まで自動で口が揃う。
+// og:image は当面サイト共通（BaseLayout 既定）。slug 別画像は Phase2。
+const pageTitle = `${agent.name}｜さかちゃん`;
+const pageDescription = agent.oneLineValue;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <article class="detail">
+    <div class="detail-inner">
+      <a class="back-link" href="/#team">
+        <span aria-hidden="true">←</span> エージェント一覧へ戻る
+      </a>
+
+      <header class="detail-head">
+        <span class="detail-tag">{agent.tag}</span>
+        <h1 class="detail-title">{agent.name}</h1>
+        <p class="detail-lead">{agent.oneLineValue}</p>
+      </header>
+
+      <!-- 16:9 実演デモ枠。Phase1 はポスター＋「実演デモ準備中」。
+           demoVideo が入った Phase2 で動画に差し替える想定。 -->
+      <section class="demo" aria-label="実演デモ">
+        <div class="demo-frame">
+          <Image
+            class="demo-poster"
+            src={agent.posterImage}
+            alt=""
+            widths={[640, 1280]}
+            sizes="(min-width: 880px) 880px, 100vw"
+            formats={['webp']}
+            quality={80}
+            loading="lazy"
+          />
+          <div class="demo-overlay">
+            <span class="demo-eyebrow">DEMO</span>
+            <p class="demo-note">実演デモ準備中</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="detail-cols">
+        <section class="block">
+          <h2 class="block-title">できること</h2>
+          <ul class="outcome-list">
+            {agent.outcomes.map((o) => <li>{o}</li>)}
+          </ul>
+        </section>
+
+        <section class="block">
+          <h2 class="block-title">使っている機能</h2>
+          <ul class="tech-list">
+            {agent.techStack.map((t) => <li>{t}</li>)}
+          </ul>
+        </section>
+      </div>
+
+      <section class="cta-band">
+        <p class="cta-text">このエージェントの導入・カスタマイズについて相談できます。</p>
+        <a class="cta-button" href="/#contact">相談する <span aria-hidden="true">→</span></a>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .detail {
+    background: var(--color-kinari);
+    padding: var(--space-6) var(--space-3) var(--space-7);
+  }
+  .detail-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .back-link {
+    align-self: flex-start;
+    font-size: var(--font-size-sm);
+    color: var(--color-aizumi);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .back-link:hover {
+    color: var(--color-kincha);
+    border-color: var(--color-kincha);
+  }
+
+  .detail-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .detail-tag {
+    align-self: flex-start;
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    color: var(--color-kincha-dark);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .detail-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+  }
+  .detail-lead {
+    font-size: var(--font-size-lg);
+    color: var(--color-usuzumi);
+    max-width: 40em;
+  }
+
+  /* 16:9 実演デモ枠 */
+  .demo-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-aizumi-deep);
+    border: 1px solid rgba(31, 42, 60, 0.08);
+    box-shadow: var(--shadow-sm);
+  }
+  .demo-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    /* デモ準備中の品位：ポスターは少し沈めて文字を主役に */
+    filter: saturate(0.92) brightness(0.82);
+  }
+  .demo-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    /* 二段構えで絵柄に運命を預けない。
+       (1) ベースグラデを上下とも底上げ（最悪=明るいポスターでも沈む）。
+       (2) 文字塊の真後ろに radial の暗パネルを重ね、中央の実効背景を確実に暗く。
+       worst-case 明部ポスターで 本文10.7:1 / DEMO 5.3:1、純白ポスターでも 本文9.7:1 / DEMO 4.8:1。 */
+    background:
+      radial-gradient(60% 48% at 50% 50%, rgba(16, 28, 43, 0.62) 0%, rgba(16, 28, 43, 0) 72%),
+      linear-gradient(180deg, rgba(20, 32, 47, 0.5) 0%, rgba(20, 32, 47, 0.62) 100%);
+    color: var(--color-kinari);
+    text-align: center;
+  }
+  .demo-eyebrow {
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.2em;
+    /* 山吹はアクセントとして維持。暗パネル上で 5.3:1（AA達成）。 */
+    color: var(--color-kincha-light);
+  }
+  .demo-note {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .detail-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-5);
+  }
+  .block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .block-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    padding-bottom: var(--space-1);
+    border-bottom: 1px solid var(--color-kincha);
+    align-self: flex-start;
+  }
+  .outcome-list,
+  .tech-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .outcome-list li,
+  .tech-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: var(--font-size-base);
+    color: var(--color-aizumi);
+    line-height: 1.7;
+  }
+  .outcome-list li::before,
+  .tech-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 8px;
+    height: 1px;
+    background: var(--color-kincha);
+  }
+
+  .cta-band {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--color-aizumi);
+    color: var(--color-kinari);
+    border-radius: var(--radius-md);
+  }
+  .cta-text {
+    font-size: var(--font-size-base);
+    color: rgba(246, 241, 231, 0.9);
+    max-width: 36em;
+  }
+  .cta-button {
+    flex-shrink: 0;
+    background: var(--color-kincha);
+    color: var(--color-aizumi-deep);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    transition: background 0.15s ease;
+  }
+  .cta-button:hover {
+    background: var(--color-kincha-light);
+  }
+</style>
