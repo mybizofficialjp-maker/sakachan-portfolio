@@ -6,3 +6,6 @@ dist/
 .DS_Store
 Thumbs.db
 .vercel/
+
+# 画像生成プロンプト控え（内部キャラ固有名を含むため公開リポには入れない。ローカルにのみ残す）
+src/assets/agents/*.prompt.md

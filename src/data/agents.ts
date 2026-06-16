@@ -4,6 +4,7 @@ import contentStrategyImg from '../assets/agents/content-strategy.png';
 import designConsultantImg from '../assets/agents/design-consultant.png';
 import securityGuardImg from '../assets/agents/security-guard.png';
 import customerSupportImg from '../assets/agents/customer-support.png';
+import accountingImg from '../assets/agents/accounting.png';
 
 export type Agent = {
   slug: string;
@@ -107,6 +108,20 @@ export const agents: Agent[] = [
     image: customerSupportImg,
     posterImage: customerSupportImg,
     techStack: ['Claude Code', '業種プロファイル差し替え', '3軸エスカレーション判定ロジック'],
-    feature: true,
+  },
+  {
+    slug: 'accounting',
+    name: '経理AI',
+    tag: '経理',
+    pain: '領収書や仕訳の処理に追われ、月次の数字が見えるのが遅れて経営判断が後手になる',
+    oneLineValue: '領収書処理から月次分析まで肩代わりして、お金まわりの不安を静かに整える経理担当。',
+    outcomes: [
+      '領収書・請求書の読み取りと仕訳ドラフト作成',
+      '月次レポートの数値分析と気になる動きの抽出',
+      '勘定科目の相談と請求書・経費精算の下書き',
+    ],
+    image: accountingImg,
+    posterImage: accountingImg,
+    techStack: ['Claude Code', '会計ソフト連携（freee / マネーフォワード / 弥生）', '税務情報の都度リサーチ'],
   },
 ];
