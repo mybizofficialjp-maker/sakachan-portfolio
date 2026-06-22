@@ -50,8 +50,13 @@ import { logs } from '../data/logs';
         </p>
       </header>
       <div class="log-grid">
-        {logs.map((log) => <LogEntry log={log} />)}
+        {logs.slice(0, 3).map((log) => <LogEntry log={log} />)}
       </div>
+      {logs.length > 3 && (
+        <div class="log-more-row">
+          <a class="log-more" href="/logs">過去の実装ログを見る <span aria-hidden="true">→</span></a>
+        </div>
+      )}
     </div>
   </section>
 
@@ -251,6 +256,27 @@ import { logs } from '../data/logs';
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: var(--space-3);
+  }
+  .log-more-row {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-5);
+  }
+  .log-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    border: 1px solid var(--color-kincha);
+    color: var(--color-kincha-dark);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .log-more:hover {
+    background: var(--color-kincha);
+    color: var(--color-aizumi-deep);
   }
 
   .about-inner {

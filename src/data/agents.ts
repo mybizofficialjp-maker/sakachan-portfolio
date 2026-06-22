@@ -5,6 +5,7 @@ import designConsultantImg from '../assets/agents/design-consultant.png';
 import securityGuardImg from '../assets/agents/security-guard.png';
 import customerSupportImg from '../assets/agents/customer-support.png';
 import accountingImg from '../assets/agents/accounting.png';
+import researchAssistantImg from '../assets/agents/research-assistant.png';
 
 export type Agent = {
   slug: string;
@@ -63,6 +64,21 @@ export const agents: Agent[] = [
     image: contentStrategyImg,
     posterImage: contentStrategyImg,
     techStack: ['Claude Code', 'Web 検索リサーチ', 'スプレッドシート連携（投稿管理）'],
+  },
+  {
+    slug: 'research-assistant',
+    name: 'リサーチャーAI',
+    tag: '市場リサーチ',
+    pain: '何から調べればいいか分からず手が止まる、ネットの情報を鵜呑みにして判断を誤りそうで不安',
+    oneLineValue: '競合・業界・顧客を一次情報まで掘り下げ、事実と推測を分けて渡す「調べる相棒」。',
+    outcomes: [
+      '競合モニタリングを決まった型で定点観測',
+      '業界動向・顧客ニーズを構造化レポートに整理',
+      '事実と推測をラベル分けし、根拠の薄い主張は要検証として明示',
+    ],
+    image: researchAssistantImg,
+    posterImage: researchAssistantImg,
+    techStack: ['Claude Code', 'Web 検索・一次情報リサーチ（決算 / IR / 公的統計）', '多段ワークフロー（計画→収集→クロスチェック→検証）'],
   },
   {
     slug: 'design-consultant',

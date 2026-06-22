@@ -1,0 +1,162 @@
+---
+import type { LogEntry } from '../data/logs';
+interface Props {
+  log: LogEntry;
+}
+const { log } = Astro.props;
+---
+
+<details class="acc">
+  <summary class="acc-summary">
+    <span class="acc-head">
+      <time class="acc-date">{log.date}</time>
+      <span class="acc-title">{log.title}</span>
+    </span>
+    <span class="acc-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="acc-body">
+    <p class="acc-text">{log.summary}</p>
+    <div class="acc-learnings-wrap">
+      <p class="acc-label">学び</p>
+      <ul class="acc-learnings">
+        {log.learnings.map((l) => <li>{l}</li>)}
+      </ul>
+    </div>
+    <ul class="acc-tags">
+      {log.tags.map((t) => <li>{t}</li>)}
+    </ul>
+  </div>
+</details>
+
+<style>
+  .acc {
+    background: var(--color-white);
+    border: 1px solid rgba(31, 42, 60, 0.08);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+  .acc[open] {
+    box-shadow: var(--shadow-sm);
+  }
+  .acc-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease;
+  }
+  /* デフォルトの三角マーカーを消す（Safari/Chrome/Firefox） */
+  .acc-summary::-webkit-details-marker {
+    display: none;
+  }
+  .acc-summary::marker {
+    content: '';
+  }
+  .acc-summary:hover {
+    background: var(--color-kinari);
+  }
+  /* キーボードフォーカスを明示（アクセシビリティ） */
+  .acc-summary:focus-visible {
+    outline: 2px solid var(--color-kincha);
+    outline-offset: -2px;
+  }
+  .acc-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+  }
+  .acc-date {
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    color: var(--color-kincha-dark);
+    letter-spacing: 0.1em;
+  }
+  .acc-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    color: var(--color-aizumi);
+  }
+  /* 開閉シェブロン（CSSで描画。開くと180度回転） */
+  .acc-icon {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--color-kincha-dark);
+    border-bottom: 2px solid var(--color-kincha-dark);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    margin-bottom: 4px;
+  }
+  .acc[open] .acc-icon {
+    transform: rotate(-135deg);
+    margin-bottom: 0;
+    margin-top: 4px;
+  }
+  .acc-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: 0 var(--space-4) var(--space-4);
+    border-top: 1px solid rgba(31, 42, 60, 0.06);
+    padding-top: var(--space-3);
+  }
+  .acc-text {
+    color: var(--color-usuzumi);
+    font-size: var(--font-size-sm);
+  }
+  .acc-learnings-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .acc-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-usuzumi-muted);
+    letter-spacing: 0.05em;
+  }
+  .acc-learnings {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-left: 0;
+  }
+  .acc-learnings li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-aizumi);
+    line-height: 1.6;
+  }
+  .acc-learnings li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 8px;
+    height: 1px;
+    background: var(--color-kincha);
+  }
+  .acc-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    padding-left: 0;
+    margin-top: var(--space-1);
+  }
+  .acc-tags li {
+    font-size: var(--font-size-xs);
+    color: var(--color-usuzumi-muted);
+    background: var(--color-kinari);
+    padding: 2px var(--space-1);
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.05em;
+  }
+</style>

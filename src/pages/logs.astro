@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LogAccordion from '../components/LogAccordion.astro';
+import { logs } from '../data/logs';
+
+const pageTitle = '実装ログ（アーカイブ）｜さかちゃん';
+const pageDescription = '日々のつまづきと、その対処から得た学び。完成品ではなく過程を残した実装ログの全アーカイブ。';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="log-archive">
+    <div class="section-inner">
+      <a class="back-link" href="/#log">
+        <span aria-hidden="true">←</span> トップに戻る
+      </a>
+
+      <header class="section-head">
+        <span class="section-eyebrow">LEARNING IN PUBLIC</span>
+        <h1 class="section-title">実装ログ アーカイブ</h1>
+        <p class="section-lead">
+          日々のつまづきと、その対処から得た学び。完成品ではなく過程を残します。見出しをクリックすると学びが開きます。
+        </p>
+      </header>
+
+      <div class="log-list">
+        {logs.map((log) => <LogAccordion log={log} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .log-archive {
+    background: var(--color-kinari-deep);
+    padding: var(--space-6) var(--space-3) var(--space-7);
+  }
+  .section-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-aizumi);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .back-link:hover {
+    color: var(--color-kincha);
+    border-color: var(--color-kincha);
+  }
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-bottom: var(--space-5);
+  }
+  .section-eyebrow {
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    color: var(--color-kincha-dark);
+    letter-spacing: 0.15em;
+  }
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+  }
+  .section-lead {
+    color: var(--color-usuzumi);
+    max-width: 640px;
+  }
+  .log-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 760px;
+  }
+</style>
