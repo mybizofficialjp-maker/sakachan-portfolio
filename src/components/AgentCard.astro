@@ -147,6 +147,10 @@ const { agent } = Astro.props;
   .card-pain {
     font-size: var(--font-size-sm);
     color: var(--color-usuzumi);
+    /* 日本語の禁則を厳格適用（小書き仮名・約物を行頭に置かない）。
+       text-wrap: pretty で最終行のバランスを取り、一文字だけの行残りを抑える。 */
+    line-break: strict;
+    text-wrap: pretty;
   }
   .card-outcomes {
     list-style: none;
@@ -159,6 +163,8 @@ const { agent } = Astro.props;
     padding-left: 1.25rem;
     font-size: var(--font-size-sm);
     color: var(--color-aizumi);
+    line-break: strict;
+    text-wrap: pretty;
   }
   .card-outcomes li::before {
     content: '';

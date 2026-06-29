@@ -6,6 +6,7 @@ import securityGuardImg from '../assets/agents/security-guard.png';
 import customerSupportImg from '../assets/agents/customer-support.png';
 import accountingImg from '../assets/agents/accounting.png';
 import researchAssistantImg from '../assets/agents/research-assistant.png';
+import engineerAssistantImg from '../assets/agents/engineer-assistant.png';
 
 export type Agent = {
   slug: string;
@@ -35,6 +36,21 @@ export type Agent = {
 };
 
 export const agents: Agent[] = [
+  {
+    slug: 'customer-support',
+    name: 'カスタマーサポートAI',
+    tag: 'カスタマーサポート',
+    pain: '問い合わせ対応に追われて本業が進まず、担当者ごとに対応品質がばらつく',
+    oneLineValue: '問い合わせの返信下書きとエスカレーション判定で、対応品質を均すサポート担当。',
+    outcomes: [
+      'FAQ・問い合わせへの返信ドラフト作成',
+      '緊急度・感情・金額の3軸で振り分け',
+      '顧客の声（VOC）を集約して改善ポイントを抽出',
+    ],
+    image: customerSupportImg,
+    posterImage: customerSupportImg,
+    techStack: ['Claude Code', '業種プロファイル差し替え', '3軸エスカレーション判定ロジック'],
+  },
   {
     slug: 'secretary',
     name: 'AI秘書',
@@ -69,7 +85,7 @@ export const agents: Agent[] = [
     slug: 'research-assistant',
     name: 'リサーチャーAI',
     tag: '市場リサーチ',
-    pain: '何から調べればいいか分からず手が止まる、ネットの情報を鵜呑みにして判断を誤りそうで不安',
+    pain: '何から調べればいいか分からず、ネット情報を鵜呑みにして判断を誤らないか不安',
     oneLineValue: '競合・業界・顧客を一次情報まで掘り下げ、事実と推測を分けて渡す「調べる相棒」。',
     outcomes: [
       '競合モニタリングを決まった型で定点観測',
@@ -102,28 +118,28 @@ export const agents: Agent[] = [
     pain: 'APIキーや認証情報、AI自動化の設定が無防備なまま増え、漏れたときに気づけない',
     oneLineValue: '「漏れる前提」で設計する、APIキー巡回とAI設定監査のゼロトラスト番人。',
     outcomes: [
-      'APIキー・認証情報の漏洩巡回とゼロトラスト診断',
+      'APIキー漏洩巡回とゼロトラスト診断',
       'CLAUDE.md・hooks・MCPスコープなどAI自動化設定の監査',
-      '新しいツール導入前の安全チェックと定期監視レポート',
+      'ツール導入前チェックと定期監視レポート',
     ],
     image: securityGuardImg,
     posterImage: securityGuardImg,
     techStack: ['Claude Code', '設定ファイル監査（CLAUDE.md / hooks / MCP）', '定期巡回（週次・月次）'],
   },
   {
-    slug: 'customer-support',
-    name: 'カスタマーサポートAI',
-    tag: 'カスタマーサポート',
-    pain: '問い合わせ対応に追われて本業が進まず、担当者ごとに対応品質がばらつく',
-    oneLineValue: '問い合わせの返信下書きとエスカレーション判定で、対応品質を均すサポート担当。',
+    slug: 'engineer-assistant',
+    name: 'エンジニアAI',
+    tag: '開発支援',
+    pain: '一人開発で設計や技術選定の相談相手がおらず、動いても「これで正しいのか」を確かめられないまま進んでしまう',
+    oneLineValue: '「動くこと」と「正しいこと」を分けて、確定の前に一度立ち止まって検証する開発の相棒。',
     outcomes: [
-      'FAQ・問い合わせへの返信ドラフト作成',
-      '緊急度・感情・金額影響の3軸でエスカレーション判定',
-      '顧客の声（VOC）を集約して改善ポイントを抽出',
+      '要件定義・アーキテクチャ設計・技術選定の壁打ち',
+      'コードレビュー・デバッグ・テスト戦略',
+      'セキュリティレビューと、批判役による二重チェック',
     ],
-    image: customerSupportImg,
-    posterImage: customerSupportImg,
-    techStack: ['Claude Code', '業種プロファイル差し替え', '3軸エスカレーション判定ロジック'],
+    image: engineerAssistantImg,
+    posterImage: engineerAssistantImg,
+    techStack: ['Claude Code', '本体＋批判役（監査）の二段構成', 'コードレビュー・テスト戦略支援'],
   },
   {
     slug: 'accounting',
@@ -134,7 +150,7 @@ export const agents: Agent[] = [
     outcomes: [
       '領収書・請求書の読み取りと仕訳ドラフト作成',
       '月次レポートの数値分析と気になる動きの抽出',
-      '勘定科目の相談と請求書・経費精算の下書き',
+      '勘定科目の相談と経費精算の下書き',
     ],
     image: accountingImg,
     posterImage: accountingImg,
