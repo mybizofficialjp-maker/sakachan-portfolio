@@ -7,6 +7,7 @@ import customerSupportImg from '../assets/agents/customer-support.png';
 import accountingImg from '../assets/agents/accounting.png';
 import researchAssistantImg from '../assets/agents/research-assistant.png';
 import engineerAssistantImg from '../assets/agents/engineer-assistant.png';
+import bizdevStrategyImg from '../assets/agents/bizdev-strategy.png';
 
 export type Agent = {
   slug: string;
@@ -155,5 +156,21 @@ export const agents: Agent[] = [
     image: accountingImg,
     posterImage: accountingImg,
     techStack: ['Claude Code', '会計ソフト連携（freee / マネーフォワード / 弥生）', '税務情報の都度リサーチ'],
+  },
+  {
+    slug: 'bizdev-strategy',
+    name: '新規事業開発AI',
+    tag: '新規事業開発',
+    pain: '新規事業のアイデアはあるが、市場規模や競合の裏取り・事業計画への落とし込みを一人で抱え、判断の妥当性を確かめられない',
+    oneLineValue: 'アイデア発想から市場規模の算出・競合分析・事業計画書まで、5つの役割で一気通貫に伴走する新規事業チーム。',
+    outcomes: [
+      '市場規模（TAM/SAM/SOM）の算出と競合・業界のリサーチ',
+      'SWOT・3C・4P・ビジネスモデルキャンバスなどフレームワーク分析',
+      '事業計画書・ピッチ資料への落とし込みと、批判役による検証',
+    ],
+    image: bizdevStrategyImg,
+    posterImage: bizdevStrategyImg,
+    techStack: ['Claude Code', '5役割チーム編成（統括・調査・分析・戦略・批判）', 'Web 検索によるディープリサーチ'],
+    feature: true,
   },
 ];
