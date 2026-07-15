@@ -35,20 +35,39 @@ const pageDescription = agent.oneLineValue;
            demoVideo が入った Phase2 で動画に差し替える想定。 -->
       <section class="demo" aria-label="実演デモ">
         <div class="demo-frame">
-          <Image
-            class="demo-poster"
-            src={agent.posterImage}
-            alt=""
-            widths={[640, 1280]}
-            sizes="(min-width: 880px) 880px, 100vw"
-            formats={['webp']}
-            quality={80}
-            loading="lazy"
-          />
-          <div class="demo-overlay">
-            <span class="demo-eyebrow">DEMO</span>
-            <p class="demo-note">実演デモ準備中</p>
-          </div>
+          {agent.demoVideo ? (
+            <Fragment>
+              <video
+                class="demo-video"
+                src={agent.demoVideo}
+                poster={agent.posterImage.src}
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                controls
+              ></video>
+              <span class="demo-badge">DEMO</span>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Image
+                class="demo-poster"
+                src={agent.posterImage}
+                alt=""
+                widths={[640, 1280]}
+                sizes="(min-width: 880px) 880px, 100vw"
+                formats={['webp']}
+                quality={80}
+                loading="lazy"
+              />
+              <div class="demo-overlay">
+                <span class="demo-eyebrow">DEMO</span>
+                <p class="demo-note">実演デモ準備中</p>
+              </div>
+            </Fragment>
+          )}
         </div>
       </section>
 
@@ -174,6 +193,29 @@ const pageDescription = agent.oneLineValue;
     font-size: var(--font-size-lg);
     font-weight: 700;
     letter-spacing: 0.08em;
+  }
+  /* demoVideo が設定された Phase2 の再生枠 */
+  .demo-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    background: var(--color-aizumi-deep);
+  }
+  /* 動画上に小さく DEMO を添える（操作は邪魔しない） */
+  .demo-badge {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-2);
+    font-family: var(--font-en);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.2em;
+    color: var(--color-kincha-light);
+    background: rgba(16, 28, 43, 0.62);
+    padding: 0.25em 0.7em;
+    border-radius: 4px;
+    pointer-events: none;
   }
 
   .detail-cols {

@@ -59,6 +59,7 @@ export const agents: Agent[] = [
     pain: 'メール対応とスケジュール調整に時間をとられている経営者・管理職',
     oneLineValue: 'メール返信とスケジュール調整を肩代わりする、毎朝動くAI秘書。',
     outcomes: [
+      '予定・メール・天気を毎朝1通にまとめてLINEへ自動配信',
       '受信メールを読んで返信ドラフトを3案作成',
       '文体・署名を設定して自分らしい文面を維持',
       'スケジュール確認と候補日の整理',
@@ -66,6 +67,7 @@ export const agents: Agent[] = [
     image: secretaryImg,
     posterImage: secretaryImg,
     techStack: ['Claude Code', 'Gmail / Calendar 連携', '定期実行（朝のブリーフィング）'],
+    demoVideo: '/demos/secretary.mp4',
   },
   {
     slug: 'content-strategy',
