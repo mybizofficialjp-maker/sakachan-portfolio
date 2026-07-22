@@ -31,11 +31,22 @@ const pageDescription = agent.oneLineValue;
         <p class="detail-lead">{agent.oneLineValue}</p>
       </header>
 
-      <!-- 16:9 実演デモ枠。Phase1 はポスター＋「実演デモ準備中」。
-           demoVideo が入った Phase2 で動画に差し替える想定。 -->
+      <!-- 16:9 実演デモ枠。demoEmbed（動くHTMLをiframe埋め込み）を最優先、
+           次に demoVideo（動画）、無ければポスター＋「実演デモ準備中」。 -->
       <section class="demo" aria-label="実演デモ">
         <div class="demo-frame">
-          {agent.demoVideo ? (
+          {agent.demoEmbed ? (
+            <Fragment>
+              <iframe
+                class="demo-embed"
+                src={agent.demoEmbed}
+                title={`${agent.name} 実演デモ`}
+                loading="lazy"
+                scrolling="no"
+              ></iframe>
+              <span class="demo-badge demo-badge--embed">DEMO</span>
+            </Fragment>
+          ) : agent.demoVideo ? (
             <Fragment>
               <video
                 class="demo-video"
@@ -202,6 +213,22 @@ const pageDescription = agent.oneLineValue;
     object-position: center top;
     display: block;
     background: var(--color-aizumi-deep);
+  }
+  /* demoEmbed：動くHTMLデモをiframeで埋め込む（録画不要・常にくっきり） */
+  .demo-embed {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    background: #000;
+  }
+  /* 埋め込みデモは左上にタイトルがあるため、DEMOバッジは右下へ逃がす
+     （ベース .demo-badge より後に定義される保証がないため詳細度で勝たせる） */
+  .demo-badge.demo-badge--embed {
+    top: auto;
+    left: auto;
+    bottom: var(--space-2);
+    right: var(--space-2);
   }
   /* 動画上に小さく DEMO を添える（操作は邪魔しない） */
   .demo-badge {

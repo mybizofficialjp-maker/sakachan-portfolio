@@ -26,6 +26,8 @@ export type Agent = {
   feature?: boolean;
 
   // --- 以下は Phase2 以降で後乗せする項目。型だけ用意し、当面は未設定でよい ---
+  /** 動くHTMLデモの公開パス。設定されると 16:9 枠に iframe で埋め込む（録画不要・最優先） */
+  demoEmbed?: string;
   /** 実演デモ動画（mp4 等）の公開パス。設定されると 16:9 枠が動画に差し替わる */
   demoVideo?: string;
   /** 具体的なユースケース（before→after の文脈つき想定） */
@@ -51,6 +53,7 @@ export const agents: Agent[] = [
     image: customerSupportImg,
     posterImage: customerSupportImg,
     techStack: ['Claude Code', '業種プロファイル差し替え', '3軸エスカレーション判定ロジック'],
+    demoEmbed: '/demos/customer-support.html',
   },
   {
     slug: 'secretary',
