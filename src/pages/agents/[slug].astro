@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { agents } from '../../data/agents';
 
@@ -14,7 +13,7 @@ const { agent } = Astro.props;
 
 // BaseLayout に渡すと og:title / og:description まで自動で口が揃う。
 // og:image は当面サイト共通（BaseLayout 既定）。slug 別画像は Phase2。
-const pageTitle = `${agent.name}｜さかちゃん`;
+const pageTitle = `${agent.name}｜個人開発ポートフォリオ`;
 const pageDescription = agent.oneLineValue;
 ---
 
@@ -31,8 +30,10 @@ const pageDescription = agent.oneLineValue;
         <p class="detail-lead">{agent.oneLineValue}</p>
       </header>
 
-      <!-- 16:9 実演デモ枠。demoEmbed（動くHTMLをiframe埋め込み）を最優先、
-           次に demoVideo（動画）、無ければポスター＋「実演デモ準備中」。 -->
+      <!-- 16:9 実演デモ枠。demoEmbed（動くHTMLをiframe埋め込み）を最優先、次に demoVideo（動画）。
+           どちらも無い場合は枠ごと出さない。無い物を「準備中」と大きく告知しても、
+           ページが未完成に見えるだけで読み手の得にならないため。 -->
+      {(agent.demoEmbed || agent.demoVideo) && (
       <section class="demo" aria-label="実演デモ">
         <div class="demo-frame">
           {agent.demoEmbed ? (
@@ -46,12 +47,11 @@ const pageDescription = agent.oneLineValue;
               ></iframe>
               <span class="demo-badge demo-badge--embed">DEMO</span>
             </Fragment>
-          ) : agent.demoVideo ? (
+          ) : (
             <Fragment>
               <video
                 class="demo-video"
                 src={agent.demoVideo}
-                poster={agent.posterImage.src}
                 autoplay
                 muted
                 loop
@@ -61,26 +61,10 @@ const pageDescription = agent.oneLineValue;
               ></video>
               <span class="demo-badge">DEMO</span>
             </Fragment>
-          ) : (
-            <Fragment>
-              <Image
-                class="demo-poster"
-                src={agent.posterImage}
-                alt=""
-                widths={[640, 1280]}
-                sizes="(min-width: 880px) 880px, 100vw"
-                formats={['webp']}
-                quality={80}
-                loading="lazy"
-              />
-              <div class="demo-overlay">
-                <span class="demo-eyebrow">DEMO</span>
-                <p class="demo-note">実演デモ準備中</p>
-              </div>
-            </Fragment>
           )}
         </div>
       </section>
+      )}
 
       <div class="detail-cols">
         <section class="block">
@@ -99,8 +83,8 @@ const pageDescription = agent.oneLineValue;
       </div>
 
       <section class="cta-band">
-        <p class="cta-text">このエージェントの導入・カスタマイズについて相談できます。</p>
-        <a class="cta-button" href="/#contact">相談する <span aria-hidden="true">→</span></a>
+        <p class="cta-text">この仕組みを作る過程で詰まったことと、その直し方は記録に残しています。</p>
+        <a class="cta-button" href="/logs">実装の記録を見る <span aria-hidden="true">→</span></a>
       </section>
     </div>
   </article>
@@ -165,45 +149,6 @@ const pageDescription = agent.oneLineValue;
     background: var(--color-aizumi-deep);
     border: 1px solid rgba(31, 42, 60, 0.08);
     box-shadow: var(--shadow-sm);
-  }
-  .demo-poster {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    /* デモ準備中の品位：ポスターは少し沈めて文字を主役に */
-    filter: saturate(0.92) brightness(0.82);
-  }
-  .demo-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-1);
-    /* 二段構えで絵柄に運命を預けない。
-       (1) ベースグラデを上下とも底上げ（最悪=明るいポスターでも沈む）。
-       (2) 文字塊の真後ろに radial の暗パネルを重ね、中央の実効背景を確実に暗く。
-       worst-case 明部ポスターで 本文10.7:1 / DEMO 5.3:1、純白ポスターでも 本文9.7:1 / DEMO 4.8:1。 */
-    background:
-      radial-gradient(60% 48% at 50% 50%, rgba(16, 28, 43, 0.62) 0%, rgba(16, 28, 43, 0) 72%),
-      linear-gradient(180deg, rgba(20, 32, 47, 0.5) 0%, rgba(20, 32, 47, 0.62) 100%);
-    color: var(--color-kinari);
-    text-align: center;
-  }
-  .demo-eyebrow {
-    font-family: var(--font-en);
-    font-size: var(--font-size-xs);
-    letter-spacing: 0.2em;
-    /* 山吹はアクセントとして維持。暗パネル上で 5.3:1（AA達成）。 */
-    color: var(--color-kincha-light);
-  }
-  .demo-note {
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    letter-spacing: 0.08em;
   }
   /* demoVideo が設定された Phase2 の再生枠 */
   .demo-video {

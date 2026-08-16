@@ -1,29 +1,13 @@
-import type { ImageMetadata } from 'astro';
-import secretaryImg from '../assets/agents/secretary.png';
-import contentStrategyImg from '../assets/agents/content-strategy.png';
-import designConsultantImg from '../assets/agents/design-consultant.png';
-import securityGuardImg from '../assets/agents/security-guard.png';
-import customerSupportImg from '../assets/agents/customer-support.png';
-import accountingImg from '../assets/agents/accounting.png';
-import researchAssistantImg from '../assets/agents/research-assistant.png';
-import engineerAssistantImg from '../assets/agents/engineer-assistant.png';
-import bizdevStrategyImg from '../assets/agents/bizdev-strategy.png';
-
 export type Agent = {
   slug: string;
   name: string;
   tag: string;
   pain: string;
   outcomes: string[];
-  image: ImageMetadata;
   /** 詳細ページの第一声。3秒で「何屋か」が伝わる粒度の一文（固有名は出さない） */
   oneLineValue: string;
-  /** 詳細ページ 16:9 実演デモ枠のポスター画像。当面はキャラ画像を流用 */
-  posterImage: ImageMetadata;
   /** 使っている機能（Claude Code 機能名・中立ラベル） */
   techStack: string[];
-  /** true のとき、2カラムグリッドを横一杯にぶち抜く横長カード（画像左・テキスト右）で表示する */
-  feature?: boolean;
 
   // --- 以下は Phase2 以降で後乗せする項目。型だけ用意し、当面は未設定でよい ---
   /** 動くHTMLデモの公開パス。設定されると 16:9 枠に iframe で埋め込む（録画不要・最優先） */
@@ -50,8 +34,6 @@ export const agents: Agent[] = [
       '緊急度・感情・金額の3軸で振り分け',
       '顧客の声（VOC）を集約して改善ポイントを抽出',
     ],
-    image: customerSupportImg,
-    posterImage: customerSupportImg,
     techStack: ['Claude Code', '業種プロファイル差し替え', '3軸エスカレーション判定ロジック'],
     demoEmbed: '/demos/customer-support.html',
   },
@@ -67,8 +49,6 @@ export const agents: Agent[] = [
       '文体・署名を設定して自分らしい文面を維持',
       'スケジュール確認と候補日の整理',
     ],
-    image: secretaryImg,
-    posterImage: secretaryImg,
     techStack: ['Claude Code', 'Gmail / Calendar 連携', '定期実行（朝のブリーフィング）'],
     demoVideo: '/demos/secretary.mp4',
   },
@@ -83,8 +63,6 @@ export const agents: Agent[] = [
       '競合アカウントのリサーチと分析',
       '一貫したトーンでのコンテンツ案出し',
     ],
-    image: contentStrategyImg,
-    posterImage: contentStrategyImg,
     techStack: ['Claude Code', 'Web 検索リサーチ', 'スプレッドシート連携（投稿管理）'],
   },
   {
@@ -98,8 +76,6 @@ export const agents: Agent[] = [
       '業界動向・顧客ニーズを構造化レポートに整理',
       '事実と推測をラベル分けし、根拠の薄い主張は要検証として明示',
     ],
-    image: researchAssistantImg,
-    posterImage: researchAssistantImg,
     techStack: ['Claude Code', 'Web 検索・一次情報リサーチ（決算 / IR / 公的統計）', '多段ワークフロー（計画→収集→クロスチェック→検証）'],
   },
   {
@@ -113,8 +89,6 @@ export const agents: Agent[] = [
       'X・SNS用画像・サムネ・OGPの制作',
       'Webサイト・LPの配色とトンマナ設計',
     ],
-    image: designConsultantImg,
-    posterImage: designConsultantImg,
     techStack: ['Claude Code', 'Canva 連携', 'WCAG コントラスト検証'],
   },
   {
@@ -128,8 +102,6 @@ export const agents: Agent[] = [
       'CLAUDE.md・hooks・MCPスコープなどAI自動化設定の監査',
       'ツール導入前チェックと定期監視レポート',
     ],
-    image: securityGuardImg,
-    posterImage: securityGuardImg,
     techStack: ['Claude Code', '設定ファイル監査（CLAUDE.md / hooks / MCP）', '定期巡回（週次・月次）'],
   },
   {
@@ -143,8 +115,6 @@ export const agents: Agent[] = [
       'コードレビュー・デバッグ・テスト戦略',
       'セキュリティレビューと、批判役による二重チェック',
     ],
-    image: engineerAssistantImg,
-    posterImage: engineerAssistantImg,
     techStack: ['Claude Code', '本体＋批判役（監査）の二段構成', 'コードレビュー・テスト戦略支援'],
   },
   {
@@ -158,8 +128,6 @@ export const agents: Agent[] = [
       '月次レポートの数値分析と気になる動きの抽出',
       '勘定科目の相談と経費精算の下書き',
     ],
-    image: accountingImg,
-    posterImage: accountingImg,
     techStack: ['Claude Code', '会計ソフト連携（freee / マネーフォワード / 弥生）', '税務情報の都度リサーチ'],
   },
   {
@@ -173,9 +141,6 @@ export const agents: Agent[] = [
       'SWOT・3C・4P・ビジネスモデルキャンバスなどフレームワーク分析',
       '事業計画書・ピッチ資料への落とし込みと、批判役による検証',
     ],
-    image: bizdevStrategyImg,
-    posterImage: bizdevStrategyImg,
     techStack: ['Claude Code', '5役割チーム編成（統括・調査・分析・戦略・批判）', 'Web 検索によるディープリサーチ'],
-    feature: true,
   },
 ];

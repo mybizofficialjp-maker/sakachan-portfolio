@@ -9,18 +9,18 @@ import { logs } from '../data/logs';
 <BaseLayout>
   <section class="hero">
     <div class="hero-inner">
-      <span class="hero-eyebrow">CLAUDE CODE 実装伴走ポートフォリオ</span>
+      <span class="hero-eyebrow">PERSONAL PROJECTS</span>
       <h1 class="hero-title">
-        中小企業の業務を、<br />
-        <span class="hero-accent">AIエージェントのチーム</span>で支える。
+        現場の困りごとを、<br />
+        <span class="hero-accent">仕組みに変えて、記録に残す。</span>
       </h1>
       <p class="hero-lead">
-        Claude Code を導入したいが内製リソースが足りない経営者・管理職へ。
-        専門分野を持つAIエージェントが、それぞれの立場から実装を伴走します。
+        独学で、業務を支えるAIエージェントを9つ設計・実装しました。
+        作って終わりにせず、動かしながら出た不具合と、その直し方をそのまま記録として残しています。
       </p>
       <div class="hero-cta-row">
-        <a href="#team" class="btn-primary">エージェントを見る</a>
-        <a href="#contact" class="btn-ghost">無料で相談する <span aria-hidden="true">→</span></a>
+        <a href="#team" class="btn-primary">作ったものを見る</a>
+        <a href="#log" class="btn-ghost">実装の記録を見る <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -28,10 +28,11 @@ import { logs } from '../data/logs';
   <section id="team" class="team">
     <div class="section-inner">
       <header class="section-head">
-        <span class="section-eyebrow">AI AGENT TEAM</span>
-        <h2 class="section-title">専門分野を持つエージェントたち</h2>
+        <span class="section-eyebrow">WORKS</span>
+        <h2 class="section-title">作った仕組み</h2>
         <p class="section-lead">
-          経営者の「困った」を、それぞれの立場から解決する稼働中のチームです。
+          業務の困りごとごとに役割を分けて設計した9つのAIエージェント。
+          いずれも実際に動かしながら、使いにくいところを直し続けています。
         </p>
       </header>
       <div class="agent-grid">
@@ -43,10 +44,11 @@ import { logs } from '../data/logs';
   <section id="log" class="log-section">
     <div class="section-inner">
       <header class="section-head">
-        <span class="section-eyebrow">LEARNING IN PUBLIC</span>
-        <h2 class="section-title">実装ログ</h2>
+        <span class="section-eyebrow">WORK LOG</span>
+        <h2 class="section-title">実装の記録</h2>
         <p class="section-lead">
-          日々のつまづきと、その対処から得た学び。完成品ではなく過程を残します。
+          うまくいったことより、詰まったことと直し方を残しています。
+          同じ失敗を二度繰り返さないための記録です。
         </p>
       </header>
       <div class="log-grid">
@@ -54,7 +56,7 @@ import { logs } from '../data/logs';
       </div>
       {logs.length > 3 && (
         <div class="log-more-row">
-          <a class="log-more" href="/logs">過去の実装ログを見る <span aria-hidden="true">→</span></a>
+          <a class="log-more" href="/logs">過去の記録をすべて見る <span aria-hidden="true">→</span></a>
         </div>
       )}
     </div>
@@ -64,29 +66,36 @@ import { logs } from '../data/logs';
     <div class="section-inner about-inner">
       <header class="section-head">
         <span class="section-eyebrow">ABOUT</span>
-        <h2 class="section-title">さかちゃん</h2>
+        <h2 class="section-title">仕事の進め方</h2>
         <p class="section-lead">
-          Claude Code を中心とした AI 実装で、中小企業の業務を伴走するフリーランス。
-          X（<a class="inline-link" href="https://x.com/sakachan_ai" target="_blank" rel="noopener noreferrer">@sakachan_ai</a>）で
-          日々の実装過程を公開しています。
+          作るものが何であれ、確かめ方と記録の残し方は同じにしています。
+          ここに載せた仕組みは、どれもこのやり方で作りました。
         </p>
       </header>
       <div class="about-grid">
         <div class="about-block">
-          <h3 class="about-h3">できること</h3>
+          <h3 class="about-h3">確かめてから進める</h3>
           <ul class="about-list">
-            <li>Claude Code を活用した AI エージェント設計・実装（秘書／コンテンツ／デザイン等）</li>
-            <li>小規模チーム向けの業務自動化（メール対応・SNS運用・スケジュール調整）</li>
-            <li>Python / TypeScript / Astro / GAS / Vercel を組み合わせた軽量実装</li>
-            <li>Learning in public での実装プロセス公開（Xと本サイトの実装ログ）</li>
+            <li>作った本体とは別に、粗を探す役をもう一つ用意して、二段で確認してから確定する</li>
+            <li>「動いた」と「正しい」は分けて扱い、動いたことをもって完了にしない</li>
+            <li>結果はURL・時刻・画面の表示を突き合わせてから判断する。見たつもりで語らない</li>
+            <li>認証情報は仕組みの外に置く。動かす前に、漏れない形を先に決める</li>
           </ul>
         </div>
         <div class="about-block">
-          <h3 class="about-h3">スタンス</h3>
+          <h3 class="about-h3">記録を残して、次に使う</h3>
           <ul class="about-list">
-            <li>完成品の納品より、業務に馴染ませながら育てる伴走を重視</li>
-            <li>セキュリティ・著作権・アクセシビリティ（WCAG AA）は妥協しない</li>
-            <li>検証・失敗・改善の過程を隠さず公開する</li>
+            <li>詰まった事象は、原因・切り分け・対処をその日のうちに書き残す</li>
+            <li>無言で止まる経路を潰す。動いていないことに気づけない状態を作らない</li>
+            <li>直し方は手順の形にして、次に同じことが起きたときに使い回す</li>
+          </ul>
+        </div>
+        <div class="about-block">
+          <h3 class="about-h3">使っている技術</h3>
+          <ul class="about-list">
+            <li>Claude Code を使ったAIエージェントの設計・実装</li>
+            <li>Python / TypeScript / Astro / GAS / Vercel</li>
+            <li>メール・カレンダー・LINE・表計算との連携と、定期実行の仕組み</li>
           </ul>
         </div>
       </div>
@@ -97,10 +106,9 @@ import { logs } from '../data/logs';
     <div class="section-inner">
       <header class="section-head">
         <span class="section-eyebrow">CONTACT</span>
-        <h2 class="section-title">相談する</h2>
+        <h2 class="section-title">連絡先</h2>
         <p class="section-lead">
-          Claude Code の導入、AI エージェントの実装伴走について、お気軽にどうぞ。
-          まずは無料の壁打ちから始めます。
+          このサイトに載せた仕組みや、作った過程についてのお問い合わせはこちらへ。
         </p>
       </header>
       <div class="contact-grid">
@@ -110,19 +118,12 @@ import { logs } from '../data/logs';
           data-mail-trigger
           data-user="my.biz.official.jp"
           data-domain="gmail.com"
-          aria-label="メールで相談する（メールソフトが開きます）"
+          aria-label="メールで連絡する（メールソフトが開きます）"
         >
           <span class="contact-eyebrow">EMAIL</span>
-          <h3 class="contact-h3">メールで相談する</h3>
+          <h3 class="contact-h3">メールで連絡する</h3>
           <p class="contact-body">ボタンを押すとメールソフトが開きます</p>
-          <p class="contact-hint">案件・お見積もりはこちらから <span aria-hidden="true">→</span></p>
         </button>
-        <a class="contact-card" href="https://x.com/sakachan_ai" target="_blank" rel="noopener noreferrer">
-          <span class="contact-eyebrow">X / DM</span>
-          <h3 class="contact-h3">X で DM する</h3>
-          <p class="contact-body">@sakachan_ai</p>
-          <p class="contact-hint">気軽な質問・雑談はこちらから <span aria-hidden="true">→</span></p>
-        </a>
       </div>
     </div>
   </section>
@@ -338,6 +339,8 @@ import { logs } from '../data/logs';
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-3);
+    /* 連絡手段はメール1枚。横幅いっぱいに伸びて間延びしないよう上限を切る */
+    max-width: 420px;
   }
   .contact-card {
     display: flex;
